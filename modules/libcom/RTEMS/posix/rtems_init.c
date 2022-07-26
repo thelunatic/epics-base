@@ -507,10 +507,10 @@ static void rtshellCallFunc(const iocshArgBuf *args)
 {
     rtems_shell_cmd_t *cmd = rtems_shell_lookup_cmd(args[0].sval);
     int ret;
-    
+
     if (!cmd) {
         fprintf(stderr, "ERR: No such command\n");
-    
+
     } else {
         fflush(stdout);
         fflush(stderr);
@@ -756,7 +756,7 @@ dhcpcd_hook_handler(rtems_dhcpcd_hook *hook, char *const *env)
     printf("\n");
     for (;NULL != *env;++env) {
         printf("dhcpcd ---> '%s'\n", *env);
-        
+
         for(const struct dhcp_vars_t* var = dhcp_vars; var->name; var++) {
             size_t namelen = strlen(var->name);
 
@@ -857,7 +857,7 @@ default_network_dhcpcd(void)
         rv = close(fd);
         assert(rv == 0);
     }
-    
+
     sc = rtems_dhcpcd_start(NULL);
     assert(sc == RTEMS_SUCCESSFUL);
 }
@@ -992,7 +992,7 @@ POSIX_Init ( void *argument __attribute__((unused)))
     /*
      * Create a reasonable environment
      */
-    
+
     putenv ("TERM=xterm");
     putenv ("IOCSH_HISTSIZE=20");
 
@@ -1051,7 +1051,7 @@ POSIX_Init ( void *argument __attribute__((unused)))
     // wait for dhcp done ... should be if SYNCDHCP is used
     epicsEventWaitStatus stat;
     printf("\n ---- Waiting for DHCP ...\n");
-    stat = epicsEventWaitWithTimeout(dhcpDone, 600); 
+    stat = epicsEventWaitWithTimeout(dhcpDone, 600);
     if (stat == epicsEventOK)
     	epicsEventDestroy(dhcpDone);
     else if (stat == epicsEventWaitTimeout)
@@ -1136,7 +1136,7 @@ POSIX_Init ( void *argument __attribute__((unused)))
     }
     tzset();
     printf(" check for time registered , C++ initialization ...\n");
-    //osdTimeRegister();
+    osdTimeRegister();
     /*/Volumes/Epics/myExample/bin/RTEMS-xilinx_zynq_a9_qemu
      * Run the EPICS startup script
      */
