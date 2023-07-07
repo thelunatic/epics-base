@@ -1,11 +1,6 @@
 #
 # Author: Matt Rippa
 #
-ifeq ($(shell test $(RTEMS_VERSION) -gt 5; echo $$?),0)
-RTEMS_BSP = mvme2700
-else
-RTEMS_BSP = mvme2307
-endif
 RTEMS_TARGET_CPU = powerpc
 ARCH_DEP_CFLAGS += -DMY_DO_BOOTP=NULL
 ARCH_DEP_CFLAGS += -DHAVE_PPCBUG
@@ -27,3 +22,9 @@ define MUNCH_CMD
 endef
 
 include $(CONFIG)/os/CONFIG.Common.RTEMS
+
+ifeq ($(RTEMS_VERSION), $(word 1, $(sort 5 $(RTEMS_VERSION))))
+RTEMS_BSP = mvme2307
+else
+RTEMS_BSP = mvme2700
+endif
