@@ -139,46 +139,6 @@ jobs:
             configuration: static
             cross: "windows-x64-mingw"
 
-          - name: "Ub-22 gcc + RT-4.9 pc386"
-            os: ubuntu-22.04
-            cmp: gcc
-            configuration: default
-            cross: "RTEMS-pc386-qemu@4.9"
-
-          - name: "Ub-22 gcc + RT-4.10 pc386"
-            os: ubuntu-22.04
-            cmp: gcc
-            configuration: default
-            cross: "RTEMS-pc386-qemu@4.10"
-            test: NO
-
-          - name: "Ub-22 gcc + RT-5.1 pc686"
-            os: ubuntu-22.04
-            cmp: gcc
-            configuration: default
-            cross: "RTEMS-pc686-qemu@5"
-
-          - name: "Ub-22 gcc + RT-5.1 beatnik"
-            os: ubuntu-22.04
-            cmp: gcc
-            configuration: default
-            cross: "RTEMS-beatnik@5"
-            test: NO
-
-          - name: "Ub-22 gcc + RT-5.1 xilinx_zynq_a9_qemu"
-            os: ubuntu-22.04
-            cmp: gcc
-            configuration: default
-            cross: "RTEMS-xilinx_zynq_a9_qemu@5"
-            test: NO
-
-          - name: "Ub-22 gcc + RT-5.1 uC5282"
-            os: ubuntu-22.04
-            cmp: gcc
-            configuration: default
-            cross: "RTEMS-uC5282@5"
-            test: NO
-
           # Windows builds
 
           - name: "Win-22 MSC-22 (cmd shell)"
@@ -243,6 +203,9 @@ jobs:
     - name: Collect and show test results
       if: ${{ always() }}
       run: python .ci/cue.py -T 5M test-results
+
+  rtems-builder:
+    uses: thelunatic/rtems-builder/.github/workflows/rtems-common.yml@main
 
   docker:
     name: ${{ matrix.name }}
